@@ -1,0 +1,28 @@
+<div>
+  <h1>Weather Report</h1>
+  
+  <%= form_tag weather_path, method: :get do %>
+    <div>
+      <%= label_tag :address_or_zip, "Enter City or ZIP Code" %>
+      <%= text_field_tag :address_or_zip, nil,
+                         placeholder: "e.g., New York or 10001",
+                         required: true %>
+    </div>
+
+    <%= submit_tag "Get Weather" %>
+  <% end %>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('form');
+  const submitButton = form.querySelector('input[type="submit"]');
+
+  if (form) {
+    form.addEventListener('submit', () => {
+      submitButton.value = 'Loading...';
+      submitButton.disabled = true;
+    });
+  }
+});
+</script>
