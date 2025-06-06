@@ -1,0 +1,52 @@
+<div>
+  <div>
+    <div>
+      <div>
+        <h1>Weather Report</h1>
+        <%= link_to "Back", root_path %>
+      </div>
+
+      <div class="spinner hidden">Loading...</div>
+
+      <% if @weather[:error].present? %>
+        <div>
+          <div>
+            <h3 class="error">ERROR: <%= @weather[:error] %></h3>
+          </div>
+          <div>
+          </div>
+        </div>
+      <% else %>
+        <div>
+          <div>
+            <h2 class="weather-report">Weather for <%= @weather[:weather] %></h2>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+.spinner {
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+}
+.hidden {
+  display: none;
+}
+</style>
+
+<script>
+document.addEventListener('turbo:load', () => {
+  const form = document.querySelector('form');
+  const spinner = document.querySelector('.spinner');
+  
+  if (form) {
+    form.addEventListener('submit', () => {
+      spinner.classList.remove('hidden');
+    });
+  }
+});
+</script>
