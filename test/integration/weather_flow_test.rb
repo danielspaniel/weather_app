@@ -2,7 +2,7 @@ require "test_helper"
 
 class WeatherFlowTest < ActionDispatch::IntegrationTest
   ZIP_06605 = "06605".freeze
-  ZIP_06605_WEATHER_RESPONSE = "06605: ☀️ +22°C".freeze
+  ZIP_06605_WEATHER_RESPONSE = "☀️ +22°C".freeze
 
   teardown do
     Rails.cache.clear
@@ -21,7 +21,7 @@ class WeatherFlowTest < ActionDispatch::IntegrationTest
     get weather_path, params: { address_or_zip: ZIP_06605 }
 
     assert_response :success
-    assert_select ".weather-report", "Weather for #{ZIP_06605_WEATHER_RESPONSE} [ Fresh result ]"
+    assert_select ".weather-report", "Weather for #{ZIP_06605}: #{ZIP_06605_WEATHER_RESPONSE} [ Fresh result ]"
   end
 
   test "shows error for invalid location" do

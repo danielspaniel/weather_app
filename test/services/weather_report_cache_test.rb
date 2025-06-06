@@ -3,7 +3,7 @@ require "test_helper"
 class WeatherReportCacheTest < ActiveSupport::TestCase
   ZIP_06605 = "06605".freeze
   BRIDGEPORT_CT = "Bridgeport CT".freeze
-  WEATHER_RESPONSE = "06605: ☀️   +22°C\n".freeze
+  WEATHER_RESPONSE = "☀️   +22°C".freeze
 
   teardown do
     Rails.cache.clear
@@ -17,7 +17,7 @@ class WeatherReportCacheTest < ActiveSupport::TestCase
 
     travel_to Time.current do
       expected_result = {
-        weather: WEATHER_RESPONSE,
+        weather: "#{ZIP_06605}: #{WEATHER_RESPONSE}",
         cached: false,
         cached_at: Time.current
       }
@@ -50,7 +50,7 @@ class WeatherReportCacheTest < ActiveSupport::TestCase
 
     travel_to Time.current do
       expected_result = {
-        weather: WEATHER_RESPONSE,
+        weather: "#{ZIP_06605}: #{WEATHER_RESPONSE}",
         cached: false,
         cached_at: Time.current
       }
@@ -61,7 +61,7 @@ class WeatherReportCacheTest < ActiveSupport::TestCase
 
     travel_to Time.current do
       expected_result = {
-        weather: WEATHER_RESPONSE,
+        weather: "#{ZIP_06605}: #{WEATHER_RESPONSE}",
         cached: false,
         cached_at: Time.current
       }

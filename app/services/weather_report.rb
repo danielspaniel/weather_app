@@ -1,7 +1,11 @@
 class WeatherReport
   SEARCH_URL = "https://wttr.in".freeze
-  SEARCH_PARAMS = { format: 3 }.freeze
+  SEARCH_PARAMS = { format: "+%c+%t" }.freeze
   ERROR_MESSAGE = "Could not get weather for that location: ".freeze
+
+  def self.fetch(address_or_zip)
+    new(address_or_zip).fetch
+  end
 
   def initialize(address_or_zip)
     @address_or_zip = address_or_zip
@@ -25,8 +29,7 @@ class WeatherReport
   end
 
   def success_response(response)
-    weather_without_location = response.body.split(":", 2)[1]
-    { weather: "#{@address_or_zip}:#{weather_without_location}" }
+    { weather: "#{@address_or_zip}: #{response.body}" }
   end
 
   def error_message
