@@ -20,13 +20,7 @@
         <div class="weather-report">
           <h2>Weather for </h2>
           <p><%= @weather[:weather] %></p>
-          <p>
-            <% if @weather[:cached] %>
-              Cached at: <%= @weather[:cached_at].strftime("%B %d, %Y at %I:%M %p") %>
-            <% else %>
-              [ Fresh result ]
-            <% end %>
-          </p>
+          <p><%= cache_status_display(@weather) %></p>
         </div>
       <% end %>
     </div>
